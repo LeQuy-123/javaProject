@@ -52,6 +52,9 @@ public class QuanLyGUI extends javax.swing.JFrame {
         jPanel12 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jButton10 = new javax.swing.JButton();
+        jPanel10 = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        jButton7 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
         image_bg = new javax.swing.JLabel();
 
@@ -146,18 +149,18 @@ public class QuanLyGUI extends javax.swing.JFrame {
         });
         jPanel6.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 140, 30));
 
-        jPanel5.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 510, 250, 50));
+        jPanel5.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 530, 250, 50));
 
         jPanel8.setBackground(new java.awt.Color(153, 153, 153));
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon_image/icons8_vegetarian_food_30px.png"))); // NOI18N
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon_image/icons8_comments_50px.png"))); // NOI18N
         jPanel8.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 50));
 
         jButton6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jButton6.setForeground(new java.awt.Color(0, 97, 97));
-        jButton6.setText("Thực phẩm");
+        jButton6.setText("Xử lý yêu cầu");
         jButton6.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(138, 154, 146), 2, true));
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -166,7 +169,7 @@ public class QuanLyGUI extends javax.swing.JFrame {
         });
         jPanel8.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 140, 30));
 
-        jPanel5.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 250, 50));
+        jPanel5.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, 250, 50));
 
         jPanel9.setBackground(new java.awt.Color(153, 153, 153));
         jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -186,7 +189,7 @@ public class QuanLyGUI extends javax.swing.JFrame {
         });
         jPanel9.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 140, 30));
 
-        jPanel5.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 250, 50));
+        jPanel5.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 250, 50));
 
         jPanel12.setBackground(new java.awt.Color(153, 153, 153));
         jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -205,7 +208,27 @@ public class QuanLyGUI extends javax.swing.JFrame {
         });
         jPanel12.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 140, 30));
 
-        jPanel5.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 250, 50));
+        jPanel5.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 250, 50));
+
+        jPanel10.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon_image/icons8_vegetarian_food_30px.png"))); // NOI18N
+        jPanel10.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 50));
+
+        jButton7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButton7.setForeground(new java.awt.Color(0, 97, 97));
+        jButton7.setText("Thực phẩm");
+        jButton7.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(138, 154, 146), 2, true));
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        jPanel10.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 140, 30));
+
+        jPanel5.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 250, 50));
 
         jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 270, 650));
 
@@ -261,7 +284,7 @@ public class QuanLyGUI extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        new ThucPhamGUI().setVisible(true);
+        new Xulyyeucau().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton6ActionPerformed
 
@@ -270,6 +293,12 @@ public class QuanLyGUI extends javax.swing.JFrame {
         new ThongKeGUI().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        new ThucPhamGUI().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -313,12 +342,14 @@ public class QuanLyGUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -327,6 +358,7 @@ public class QuanLyGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
