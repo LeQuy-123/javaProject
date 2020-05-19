@@ -8,7 +8,6 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import javax.swing.JOptionPane;
-
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -18,17 +17,28 @@ import javax.swing.JTable;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.*;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author MSI2
  */
 public class KhaiBaoGUI extends javax.swing.JFrame {
-
-    /**
+    String url = "jdbc:sqlserver://DESKTOP-6OCE0A7;databaseName=JavaProject";
+    String user = "Quy";
+    String password= "Anhlaquy1";
+                      /**
      * Creates new form KhaiBaoGUI
      */
     public KhaiBaoGUI() {
         initComponents();
+        getData();
     }
 
     /**
@@ -121,7 +131,7 @@ public class KhaiBaoGUI extends javax.swing.JFrame {
                 .addGap(220, 220, 220))
         );
 
-        jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1080, 60));
+        jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 1080, 60));
 
         jPanel11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 102), 3));
         jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -199,7 +209,7 @@ public class KhaiBaoGUI extends javax.swing.JFrame {
         });
         jPanel11.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 230, 100, 40));
 
-        jPanel3.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 360, 530, 280));
+        jPanel3.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 380, 530, 280));
 
         jPanel13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 102), 3));
 
@@ -211,11 +221,11 @@ public class KhaiBaoGUI extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Tên", "Tuổi", "Tình trạng", "Tiền sử tiếp xúc", "Địa chỉ", "Thông tin đi lại"
+                "Id", "Tên", "Tuổi", "Tình trạng", "Tiền sử tiếp xúc", "Địa chỉ", "Thông tin đi lại"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -226,12 +236,17 @@ public class KhaiBaoGUI extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTable1);
         jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(20);
-            jTable1.getColumnModel().getColumn(1).setPreferredWidth(5);
-            jTable1.getColumnModel().getColumn(2).setPreferredWidth(30);
-            jTable1.getColumnModel().getColumn(3).setPreferredWidth(50);
-            jTable1.getColumnModel().getColumn(4).setPreferredWidth(100);
+            jTable1.getColumnModel().getColumn(0).setMinWidth(30);
+            jTable1.getColumnModel().getColumn(0).setPreferredWidth(30);
+            jTable1.getColumnModel().getColumn(0).setMaxWidth(30);
+            jTable1.getColumnModel().getColumn(1).setPreferredWidth(20);
+            jTable1.getColumnModel().getColumn(2).setMinWidth(40);
+            jTable1.getColumnModel().getColumn(2).setPreferredWidth(40);
+            jTable1.getColumnModel().getColumn(2).setMaxWidth(40);
+            jTable1.getColumnModel().getColumn(3).setPreferredWidth(30);
+            jTable1.getColumnModel().getColumn(4).setPreferredWidth(50);
             jTable1.getColumnModel().getColumn(5).setPreferredWidth(100);
+            jTable1.getColumnModel().getColumn(6).setPreferredWidth(100);
         }
 
         jButtonDelleteRow.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -257,7 +272,7 @@ public class KhaiBaoGUI extends javax.swing.JFrame {
                 .addComponent(jLabel21)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonDelleteRow, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                .addGap(23, 23, 23))
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -267,13 +282,13 @@ public class KhaiBaoGUI extends javax.swing.JFrame {
                     .addComponent(jLabel21)
                     .addComponent(jButtonDelleteRow, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jPanel3.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, -1, 260));
+        jPanel3.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, -1, 260));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 670));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, -1, 670));
 
         pack();
         setLocationRelativeTo(null);
@@ -283,12 +298,27 @@ public class KhaiBaoGUI extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
         Object [] row = new Object[6];
         row[0]=jTextField1.getText();
-        row[1]=jTextField2.getText();
-        row[2]=jTextField3.getText();
+        row[2]=jTextField2.getText();
+        row[1]=jTextField3.getText();
         row[3]=jComboBox2.getSelectedItem().toString();
         row[4]=jComboBox3.getSelectedItem().toString();
         row[5]=jTextPane1.getText();
-        model.addRow(row);
+        if(row[0].equals("")||row[1].equals("")||row[2].equals("")||row[5].equals("")){
+            JOptionPane.showMessageDialog(null, "Vui lòng khai báo đầy đủ thông tin");
+        }else{
+            //thêm hàng vào jtable
+            model.addRow(row);
+            //kết nối mysql 
+            String sql = "INSERT INTO DanhSachKhaiBao VALUES ('" + row[0] + "','" + row[1] + "','" + row[2] + "','" + row[3] + "','" + row[4]+"','" + row[5]+"');";
+            try {
+                Connection connection = DriverManager.getConnection(url, user, password);
+                Statement st = connection.createStatement();
+                st.executeUpdate(sql);
+                connection.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(KhaiBaoGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButtonDelleteRowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDelleteRowActionPerformed
@@ -299,6 +329,16 @@ public class KhaiBaoGUI extends javax.swing.JFrame {
         if (getSelectedRowForDeletion >= 0) {
             model.removeRow(getSelectedRowForDeletion);
             JOptionPane.showMessageDialog(null, "Row Deleted");
+            String id = jTable1.getValueAt(getSelectedRowForDeletion, 0).toString();
+            String sql = "DELETE FROM DanhSachKhaiBao WHERE id="+id;
+            try {
+                Connection connection = DriverManager.getConnection(url, user, password);
+                Statement st = connection.createStatement();
+                st.executeUpdate(sql);
+                connection.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(KhaiBaoGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Unable To Delete");
         }
@@ -306,7 +346,6 @@ public class KhaiBaoGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonDelleteRowActionPerformed
 
     private void jButtonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBackActionPerformed
-        // TODO add your handling code here:
         new BenhNhaGUI().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonBackActionPerformed
@@ -328,6 +367,47 @@ public class KhaiBaoGUI extends javax.swing.JFrame {
         jComboBox3.setSelectedIndex(0);
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void getData(){
+        try {
+            Connection connection = DriverManager.getConnection(url, user, password);
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM DanhSachKhaiBao;");
+
+            // get columns info
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int columnCount = rsmd.getColumnCount();
+
+            // for changing column and row model
+            DefaultTableModel tm = (DefaultTableModel) jTable1.getModel();
+
+            // clear existing columns
+            tm.setColumnCount(0);
+
+            // add specified columns to table
+            for (int i = 1; i <= columnCount; i++ ) {
+                tm.addColumn(rsmd.getColumnName(i));
+            }
+
+            // clear existing rows
+            tm.setRowCount(0);
+
+            // add rows to table
+            while (rs.next()) {
+                String[] a = new String[columnCount];
+                for(int i = 0; i < columnCount; i++) {
+                    a[i] = rs.getString(i+1);
+                }
+                tm.addRow(a);
+            }
+            tm.fireTableDataChanged();
+
+            // Close ResultSet and Statement
+            rs.close();
+            st.close();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex, ex.getMessage(), WIDTH, null);
+        } 
+    }    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -352,7 +432,7 @@ public class KhaiBaoGUI extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
             new KhaiBaoGUI().setVisible(true);
