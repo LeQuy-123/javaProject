@@ -29,17 +29,8 @@ public class DangNhapGUI extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         bg = new javax.swing.JPanel();
         text_dangnhap = new javax.swing.JLabel();
-        username = new javax.swing.JPanel();
-        jTextField_username = new javax.swing.JTextField();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        password = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jPassword = new javax.swing.JPasswordField();
-        jLabel3 = new javax.swing.JLabel();
-        jCheck_show_password = new javax.swing.JCheckBox();
-        button_back = new javax.swing.JButton();
-        button_login = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -58,110 +49,31 @@ public class DangNhapGUI extends javax.swing.JFrame {
         text_dangnhap.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         text_dangnhap.setForeground(new java.awt.Color(0, 97, 97));
         text_dangnhap.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        text_dangnhap.setText("Đăng Nhập");
+        text_dangnhap.setText("Trang chủ");
         bg.add(text_dangnhap);
-        text_dangnhap.setBounds(90, 10, 360, 50);
+        text_dangnhap.setBounds(80, 10, 360, 50);
 
-        username.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 153, 153), 2));
-        username.setOpaque(false);
-        username.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jTextField_username.setBackground(new java.awt.Color(231, 242, 250));
-        jTextField_username.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jTextField_username.setForeground(new java.awt.Color(0, 97, 97));
-        jTextField_username.setBorder(null);
-        jTextField_username.setOpaque(false);
-        username.add(jTextField_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 280, 39));
-
-        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        username.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 280, 1));
-
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon_image/icons8_account_40px.png"))); // NOI18N
-        username.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, 50, 40));
-
-        bg.add(username);
-        username.setBounds(100, 70, 360, 60);
-
-        password.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 153, 153), 2));
-        password.setOpaque(false);
-        password.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel2.setBackground(new java.awt.Color(51, 51, 51));
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 280, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1, Short.MAX_VALUE)
-        );
-
-        password.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 280, 1));
-
-        jPassword.setBackground(new java.awt.Color(231, 242, 250));
-        jPassword.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jPassword.setForeground(new java.awt.Color(0, 97, 97));
-        jPassword.setBorder(null);
-        jPassword.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jPassword.setOpaque(false);
-        password.add(jPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 280, 40));
-
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon_image/icons8_lock_48px.png"))); // NOI18N
-        password.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, 50, 40));
-
-        bg.add(password);
-        password.setBounds(100, 140, 360, 60);
-
-        jCheck_show_password.setBackground(new java.awt.Color(255, 255, 255));
-        jCheck_show_password.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jCheck_show_password.setForeground(new java.awt.Color(0, 97, 97));
-        jCheck_show_password.setText("Hiển thị mật khẩu");
-        jCheck_show_password.setBorder(null);
-        jCheck_show_password.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jCheck_show_password.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        bg.add(jCheck_show_password);
-        jCheck_show_password.setBounds(100, 210, 160, 19);
-
-        button_back.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        button_back.setForeground(new java.awt.Color(0, 97, 97));
-        button_back.setText("Thoát");
-        button_back.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0), 2));
-        button_back.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton1.setText("Khai báo sức khỏe");
+        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_backActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
-        bg.add(button_back);
-        button_back.setBounds(30, 250, 80, 23);
+        bg.add(jButton1);
+        jButton1.setBounds(160, 170, 210, 50);
 
-        button_login.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        button_login.setForeground(new java.awt.Color(0, 97, 97));
-        button_login.setText("Đăng Nhập");
-        button_login.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 255, 0), 2));
-        button_login.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton2.setText("Quản lý điều trị");
+        jButton2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_loginActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
-        bg.add(button_login);
-        button_login.setBounds(420, 250, 81, 23);
+        bg.add(jButton2);
+        jButton2.setBounds(160, 100, 210, 50);
 
         jPanel3.add(bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 530, 280));
 
@@ -248,14 +160,15 @@ public class DangNhapGUI extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void button_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_backActionPerformed
-        // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_button_backActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        new QuanLyGUI().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void button_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_loginActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_button_loginActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        new BenhNhaGUI().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -283,6 +196,7 @@ public class DangNhapGUI extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(DangNhapGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -294,24 +208,15 @@ public class DangNhapGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
-    private javax.swing.JButton button_back;
-    private javax.swing.JButton button_login;
     private javax.swing.JLabel image_bg;
-    private javax.swing.JCheckBox jCheck_show_password;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPasswordField jPassword;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField_username;
-    private javax.swing.JPanel password;
     private javax.swing.JLabel text_dangnhap;
-    private javax.swing.JPanel username;
     // End of variables declaration//GEN-END:variables
 
 }
