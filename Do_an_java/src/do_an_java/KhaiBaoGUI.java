@@ -296,20 +296,24 @@ public class KhaiBaoGUI extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
-        Object [] row = new Object[6];
-        row[0]=jTextField1.getText();
-        row[2]=jTextField2.getText();
-        row[1]=jTextField3.getText();
-        row[3]=jComboBox2.getSelectedItem().toString();
-        row[4]=jComboBox3.getSelectedItem().toString();
-        row[5]=jTextPane1.getText();
-        if(row[0].equals("")||row[1].equals("")||row[2].equals("")||row[5].equals("")){
+        Object [] row = new Object[7];
+        if(model.getRowCount() == 0) row[0]=0;
+        else{
+        row[0]= Integer.parseInt( model.getValueAt(model.getRowCount()-1, 0).toString() )+1;//cột id tự động tăng
+        }
+        row[1]=jTextField1.getText();
+        row[3]=jTextField2.getText();
+        row[2]=jTextField3.getText();
+        row[4]=jComboBox2.getSelectedItem().toString();
+        row[5]=jComboBox3.getSelectedItem().toString();
+        row[6]=jTextPane1.getText();
+        if(row[6].equals("")||row[1].equals("")||row[2].equals("")||row[3].equals("")){
             JOptionPane.showMessageDialog(null, "Vui lòng khai báo đầy đủ thông tin");
         }else{
             //thêm hàng vào jtable
-            model.addRow(row);
+           
             //kết nối mysql 
-            String sql = "INSERT INTO DanhSachKhaiBao VALUES ('" + row[0] + "','" + row[1] + "','" + row[2] + "','" + row[3] + "','" + row[4]+"','" + row[5]+"');";
+            String sql = "INSERT INTO DanhSachKhaiBao VALUES ('" + row[0] + "','" + row[1] + "','" + row[2] + "','" + row[3] + "','" + row[4] + "','" + row[5]+"','" + row[6]+"');";
             try {
                 Connection connection = DriverManager.getConnection(url, user, password);
                 Statement st = connection.createStatement();
@@ -318,6 +322,7 @@ public class KhaiBaoGUI extends javax.swing.JFrame {
             } catch (SQLException ex) {
                 Logger.getLogger(KhaiBaoGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
+             model.addRow(row);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -327,18 +332,21 @@ public class KhaiBaoGUI extends javax.swing.JFrame {
         int getSelectedRowForDeletion = jTable1.getSelectedRow();
         //Check if their is a row selected
         if (getSelectedRowForDeletion >= 0) {
-            model.removeRow(getSelectedRowForDeletion);
             JOptionPane.showMessageDialog(null, "Row Deleted");
-            String id = jTable1.getValueAt(getSelectedRowForDeletion, 0).toString();
+            String id = model.getValueAt(getSelectedRowForDeletion, 0).toString();
+            System.out.println(getSelectedRowForDeletion);
+            System.out.println(id);
+
             String sql = "DELETE FROM DanhSachKhaiBao WHERE id="+id;
             try {
-                Connection connection = DriverManager.getConnection(url, user, password);
-                Statement st = connection.createStatement();
-                st.executeUpdate(sql);
-                connection.close();
+                try (Connection connection = DriverManager.getConnection(url, user, password)) {
+                    Statement st = connection.createStatement();
+                    st.executeUpdate(sql);
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(KhaiBaoGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
+             model.removeRow(getSelectedRowForDeletion);
         } else {
             JOptionPane.showMessageDialog(null, "Unable To Delete");
         }
@@ -370,41 +378,39 @@ public class KhaiBaoGUI extends javax.swing.JFrame {
     private void getData(){
         try {
             Connection connection = DriverManager.getConnection(url, user, password);
-            Statement st = connection.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM DanhSachKhaiBao;");
-
-            // get columns info
-            ResultSetMetaData rsmd = rs.getMetaData();
-            int columnCount = rsmd.getColumnCount();
-
-            // for changing column and row model
-            DefaultTableModel tm = (DefaultTableModel) jTable1.getModel();
-
-            // clear existing columns
-            tm.setColumnCount(0);
-
-            // add specified columns to table
-            for (int i = 1; i <= columnCount; i++ ) {
-                tm.addColumn(rsmd.getColumnName(i));
-            }
-
-            // clear existing rows
-            tm.setRowCount(0);
-
-            // add rows to table
-            while (rs.next()) {
-                String[] a = new String[columnCount];
-                for(int i = 0; i < columnCount; i++) {
-                    a[i] = rs.getString(i+1);
+            try (Statement st = connection.createStatement(); ResultSet rs = st.executeQuery("SELECT * FROM DanhSachKhaiBao;")) {
+                
+                // get columns info
+                ResultSetMetaData rsmd = rs.getMetaData();
+                int columnCount = rsmd.getColumnCount();
+                
+                // for changing column and row model
+                DefaultTableModel tm = (DefaultTableModel) jTable1.getModel();
+                
+                // clear existing columns
+                tm.setColumnCount(0);
+                
+                // add specified columns to table
+                for (int i = 1; i <= columnCount; i++ ) {
+                    tm.addColumn(rsmd.getColumnName(i));
                 }
-                tm.addRow(a);
-            }
-            tm.fireTableDataChanged();
 
-            // Close ResultSet and Statement
-            rs.close();
-            st.close();
-        } catch (Exception ex) {
+                // clear existing rows
+                tm.setRowCount(0);
+                
+                // add rows to table
+                while (rs.next()) {
+                    String[] a = new String[columnCount];
+                    for(int i = 0; i < columnCount; i++) {
+                        a[i] = rs.getString(i+1);
+                    }
+                    tm.addRow(a);
+                }
+                tm.fireTableDataChanged();
+                // Close ResultSet and Statement
+
+            }
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, ex, ex.getMessage(), WIDTH, null);
         } 
     }    
