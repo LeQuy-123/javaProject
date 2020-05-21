@@ -8,7 +8,7 @@
  *
  * @author Quy
  */
-import do_an_java.View.DangNhapGUI;
+import do_an_java.ViewandController.DangNhapGUI;
 public class App {
      public static void main(String[] args) {
              java.awt.EventQueue.invokeLater(() -> {
