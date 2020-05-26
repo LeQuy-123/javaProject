@@ -4,18 +4,43 @@
  * and open the template in the editor.
  */
 package do_an_java.ViewandController;
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Font;
+import javax.swing.JOptionPane;
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.*;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import do_an_java.Model.PhieuYeuCau;
 
 /**
  *
  * @author MSI2
  */
 public class YeuCauBNGUI extends javax.swing.JFrame {
-
+    String url = "jdbc:sqlserver://DESKTOP-6OCE0A7;databaseName=JavaProject";
+    String user = "Quy";
+    String password= "Anhlaquy1";
     /**
      * Creates new form YeuCauBNGUI
      */
     public YeuCauBNGUI() {
         initComponents();
+        getData();
     }
 
     /**
@@ -35,17 +60,19 @@ public class YeuCauBNGUI extends javax.swing.JFrame {
         jPanel13 = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jTable1 = new javax.swing.JTable();
         jButton6 = new javax.swing.JButton();
         jPanel11 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jButton2 = new javax.swing.JButton();
+        jButtonAdd = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
+        jTextField2 = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -87,22 +114,46 @@ public class YeuCauBNGUI extends javax.swing.JFrame {
         jLabel21.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel21.setText("Lịch sử yêu cầu");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "id", "Tên", "Phòng", "Yêu càu"
             }
-        ));
-        jScrollPane2.setViewportView(jTable2);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.setColumnSelectionAllowed(true);
+        jTable1.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(jTable1);
+        jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(0).setPreferredWidth(10);
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setPreferredWidth(50);
+            jTable1.getColumnModel().getColumn(2).setResizable(false);
+            jTable1.getColumnModel().getColumn(2).setPreferredWidth(20);
+            jTable1.getColumnModel().getColumn(3).setResizable(false);
+            jTable1.getColumnModel().getColumn(3).setPreferredWidth(100);
+        }
 
         jButton6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon_image/reset.png"))); // NOI18N
+        jButton6.setText("Xóa yêu cầu");
         jButton6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 97, 97), 2));
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -137,8 +188,8 @@ public class YeuCauBNGUI extends javax.swing.JFrame {
         jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel17.setText("Thực phẩm yêu cầu");
-        jPanel11.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
+        jLabel17.setText("Phòng:");
+        jPanel11.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon_image/icons8_cancel_24px.png"))); // NOI18N
@@ -161,24 +212,39 @@ public class YeuCauBNGUI extends javax.swing.JFrame {
         jLabel25.setText("Yêu cầu ");
         jPanel11.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
 
-        jComboBox3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "load dữ liệu lên combobox", " " }));
-        jPanel11.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 240, 30));
-
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon_image/icons8_edit_graph_report_30px_1.png"))); // NOI18N
-        jButton2.setText("yêu cầu");
-        jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 204, 51), 2));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAdd.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon_image/icons8_edit_graph_report_30px_1.png"))); // NOI18N
+        jButtonAdd.setText("yêu cầu");
+        jButtonAdd.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 204, 51), 2));
+        jButtonAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonAddActionPerformed(evt);
             }
         });
-        jPanel11.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 290, 100, 40));
+        jPanel11.add(jButtonAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 290, 100, 40));
 
         jScrollPane1.setViewportView(jTextPane1);
 
         jPanel11.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 320, 120));
+
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
+        jPanel11.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 110, 30));
+
+        jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel18.setText("Tên bệnh nhân:");
+        jPanel11.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
+
+        jTextField1.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+        jPanel11.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 280, 30));
 
         jPanel3.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 360, 350));
 
@@ -195,13 +261,115 @@ public class YeuCauBNGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        jTextPane1.setText(""); 
+        jTextField1.setText(""); 
+        jTextField2.setText(""); 
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
+             DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        PhieuYeuCau yeucau = new PhieuYeuCau(jTextField1.getText(),jTextField2.getText(),jTextPane1.getText());
+        if(model.getRowCount() == 0) 
+            yeucau.setId(0);
+        else{
+            yeucau.setId(Integer.parseInt( model.getValueAt(model.getRowCount()-1, 0).toString() )+1);//cột id tự động tăng
+        }
+        
+        if(yeucau.CheckEmpty()){
+            JOptionPane.showMessageDialog(null, "Vui lòng khai báo đầy đủ thông tin");
+        }else{
+            //thêm hàng vào jtable
+           
+            //kết nối mysql 
+            String sql = "INSERT INTO DanhSachYeuCau VALUES ('"+ yeucau.getId()+"','" + yeucau.getTen() + "','" + yeucau.getPhongID() + "','" + yeucau.getYeuCau()+"');" ;
+            try {
+                try (Connection connection = DriverManager.getConnection(url, user, password)) {
+                    Statement st = connection.createStatement();
+                    st.executeUpdate(sql);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(KhaiBaoGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+             model.addRow(new Object[]{yeucau.getId(), yeucau.getTen(),  yeucau.getPhongID(), yeucau.getYeuCau() });
+        } 
+    }                                        
 
+    private void jButtonDelleteRowActionPerformed(java.awt.event.ActionEvent evt) {                                                  
+        
+    }//GEN-LAST:event_jButtonAddActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        //Delete Selected Row        
+        int getSelectedRowForDeletion = jTable1.getSelectedRow();
+        //Check if their is a row selected
+        if (getSelectedRowForDeletion >= 0) {
+            JOptionPane.showMessageDialog(null, "Row Deleted");
+            String id = model.getValueAt(getSelectedRowForDeletion, 0).toString();
+
+            String sql = "DELETE FROM DanhSachYeuCau WHERE id="+id;
+            try {
+                try (Connection connection = DriverManager.getConnection(url, user, password)) {
+                    Statement st = connection.createStatement();
+                    st.executeUpdate(sql);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(KhaiBaoGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+             model.removeRow(getSelectedRowForDeletion);
+        } else {
+            JOptionPane.showMessageDialog(null, "Unable To Delete");
+        }
+               // TODO add your handling code here:
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+     private void getData(){
+        try {
+            Connection connection = DriverManager.getConnection(url, user, password);
+            try (Statement st = connection.createStatement(); ResultSet rs = st.executeQuery("SELECT * FROM DanhSachYeuCau;")) {
+                
+                // get columns info
+                ResultSetMetaData rsmd = rs.getMetaData();
+                int columnCount = rsmd.getColumnCount();
+                
+                // for changing column and row model
+                DefaultTableModel tm = (DefaultTableModel) jTable1.getModel();
+                
+                // clear existing columns
+                tm.setColumnCount(0);
+                
+                // add specified columns to table
+                for (int i = 1; i <= columnCount; i++ ) {
+                    tm.addColumn(rsmd.getColumnName(i));
+                }
+
+                // clear existing rows
+                tm.setRowCount(0);
+                
+                // add rows to table
+                while (rs.next()) {
+                    String[] a = new String[columnCount];
+                    for(int i = 0; i < columnCount; i++) {
+                        a[i] = rs.getString(i+1);
+                    }
+                    tm.addRow(a);
+                }
+                tm.fireTableDataChanged();
+                // Close ResultSet and Statement
+
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, ex, ex.getMessage(), WIDTH, null);
+        } 
+    }    
     /**
      * @param args the command line arguments
      */
@@ -240,11 +408,11 @@ public class YeuCauBNGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JButton jButtonAdd;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
@@ -255,7 +423,9 @@ public class YeuCauBNGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextPane jTextPane1;
     // End of variables declaration//GEN-END:variables
 }
