@@ -31,7 +31,8 @@ public class NguoiCachLy {
 
     public NguoiCachLy() {
     }
-
+    
+  
     public int getId() {
         return id;
     }
@@ -95,5 +96,7 @@ public class NguoiCachLy {
     public void setGhiChu(String ghiChu) {
         this.ghiChu = ghiChu;
     }
-    
+    public boolean checkEmpty(){
+        return this.getTen().isEmpty() || this.getLydo().isEmpty() || this.getGioiTinh().isEmpty() || this.getNgaySinh().isEmpty() || this.getSDT().isEmpty() || this.getTinhTrang().isEmpty();
+    }
 }

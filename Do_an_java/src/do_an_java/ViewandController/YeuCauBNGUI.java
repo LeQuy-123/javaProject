@@ -272,7 +272,7 @@ public class YeuCauBNGUI extends javax.swing.JFrame {
         if(model.getRowCount() == 0) 
             yeucau.setId(0);
         else{
-            yeucau.setId(Integer.parseInt( model.getValueAt(model.getRowCount()-1, 0).toString() )+1);//cột id tự động tăng
+            yeucau.setId(Integer.parseInt( model.getValueAt(model.getRowCount()-1, 0).toString().trim() )+1);//cột id tự động tăng
         }
         
         if(yeucau.CheckEmpty()){
@@ -281,7 +281,7 @@ public class YeuCauBNGUI extends javax.swing.JFrame {
             //thêm hàng vào jtable
            
             //kết nối mysql 
-            String sql = "INSERT INTO DanhSachYeuCau VALUES ('"+ yeucau.getId()+"','" + yeucau.getTen() + "','" + yeucau.getPhongID() + "','" + yeucau.getYeuCau()+"');" ;
+            String sql = "INSERT INTO DanhSachYeuCau VALUES ('"+ yeucau.getId()+"',N'" + yeucau.getTen() + "',N'" + yeucau.getPhongID() + "',N'" + yeucau.getYeuCau()+"');" ;
             try {
                 try (Connection connection = DriverManager.getConnection(url, user, password)) {
                     Statement st = connection.createStatement();

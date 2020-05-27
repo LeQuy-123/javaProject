@@ -315,7 +315,7 @@ public class KhaiBaoGUI extends javax.swing.JFrame {
             //thêm hàng vào jtable
            
             //kết nối mysql 
-            String sql = "INSERT INTO DanhSachKhaiBao VALUES ('"+ khaibao.getId()+"','" + khaibao.getTen() + "','" + khaibao.getTuoi() + "','" + khaibao.getTinhTrang() + "','" + khaibao.getTiepXuc() + "','" + khaibao.getDiaChi() + "','" + khaibao.getDiLai() + "');";
+            String sql = "INSERT INTO DanhSachKhaiBao VALUES (N'"+ khaibao.getId()+"',N'" + khaibao.getTen() + "',N'" + khaibao.getTuoi() + "',N'" + khaibao.getTinhTrang() + "',N'" + khaibao.getTiepXuc() + "',N'" + khaibao.getDiaChi() + "',N'" + khaibao.getDiLai() + "');";
             try {
                 try (Connection connection = DriverManager.getConnection(url, user, password)) {
                     Statement st = connection.createStatement();

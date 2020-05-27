@@ -388,7 +388,7 @@ public class KhuCachLyGUI extends javax.swing.JFrame {
             //thêm hàng vào jtable
            
             //kết nối mysql 
-            String sql = "INSERT INTO DanhSachKhuCL VALUES ('"+ kcl.getId()+"','"+ kcl.getTenKhu()+"','" + kcl.getSucChua() + "','" + kcl.getQuanLy()+ "','" + kcl.getSdt() + "','" + kcl.getTrangThai()+ "');";
+            String sql = "INSERT INTO DanhSachKhuCL VALUES ('"+ kcl.getId()+"',N'"+ kcl.getTenKhu()+"',N'" + kcl.getSucChua() + "',N'" + kcl.getQuanLy()+ "',N'" + kcl.getSdt() + "',N'" + kcl.getTrangThai()+ "');";
             try {
                 try (Connection connection = DriverManager.getConnection(url, user, password)) {
                     Statement st = connection.createStatement();
