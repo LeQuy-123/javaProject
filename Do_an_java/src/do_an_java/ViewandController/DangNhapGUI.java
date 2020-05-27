@@ -29,8 +29,15 @@ public class DangNhapGUI extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         bg = new javax.swing.JPanel();
         text_dangnhap = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
+        account = new javax.swing.JTextField();
+        password = new javax.swing.JPasswordField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        button_login = new javax.swing.JButton();
+        button_back1 = new javax.swing.JButton();
+        jCheck_show_password = new javax.swing.JCheckBox();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -49,33 +56,79 @@ public class DangNhapGUI extends javax.swing.JFrame {
         text_dangnhap.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         text_dangnhap.setForeground(new java.awt.Color(0, 97, 97));
         text_dangnhap.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        text_dangnhap.setText("Trang chủ");
+        text_dangnhap.setText("Đăng Nhập");
         bg.add(text_dangnhap);
         text_dangnhap.setBounds(80, 10, 360, 50);
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton1.setText("Khai báo sức khỏe");
-        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jSeparator1.setBackground(new java.awt.Color(51, 0, 51));
+        bg.add(jSeparator1);
+        jSeparator1.setBounds(140, 200, 220, 2);
+
+        jSeparator2.setBackground(new java.awt.Color(51, 0, 51));
+        bg.add(jSeparator2);
+        jSeparator2.setBounds(140, 130, 220, 10);
+
+        account.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        account.setBorder(null);
+        account.setOpaque(false);
+        bg.add(account);
+        account.setBounds(140, 100, 220, 40);
+
+        password.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        password.setBorder(null);
+        password.setOpaque(false);
+        bg.add(password);
+        password.setBounds(140, 170, 220, 40);
+
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon_image/icons8_lock_48px.png"))); // NOI18N
+        bg.add(jLabel3);
+        jLabel3.setBounds(370, 150, 60, 50);
+
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon_image/icons8_account_40px.png"))); // NOI18N
+        bg.add(jLabel4);
+        jLabel4.setBounds(370, 80, 60, 50);
+
+        button_login.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        button_login.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon_image/icons8_login_32px.png"))); // NOI18N
+        button_login.setText("Đăng nhập");
+        button_login.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 255, 0), 2));
+        button_login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                button_loginActionPerformed(evt);
             }
         });
-        bg.add(jButton1);
-        jButton1.setBounds(160, 170, 210, 50);
+        bg.add(button_login);
+        button_login.setBounds(360, 290, 130, 30);
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton2.setText("Quản lý điều trị");
-        jButton2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        button_back1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        button_back1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon_image/back.png"))); // NOI18N
+        button_back1.setText("Thoát");
+        button_back1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0), 2));
+        button_back1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                button_back1ActionPerformed(evt);
             }
         });
-        bg.add(jButton2);
-        jButton2.setBounds(160, 100, 210, 50);
+        bg.add(button_back1);
+        button_back1.setBounds(60, 290, 110, 30);
 
-        jPanel3.add(bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 530, 280));
+        jCheck_show_password.setBackground(new java.awt.Color(255, 255, 255));
+        jCheck_show_password.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jCheck_show_password.setText("Hiển thị mật khẩu");
+        jCheck_show_password.setBorder(null);
+        jCheck_show_password.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jCheck_show_password.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        jCheck_show_password.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheck_show_passwordActionPerformed(evt);
+            }
+        });
+        bg.add(jCheck_show_password);
+        jCheck_show_password.setBounds(140, 220, 139, 17);
+
+        jPanel3.add(bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 530, 330));
 
         jPanel4.setBackground(new java.awt.Color(231, 242, 250));
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 153, 153), 2));
@@ -160,33 +213,49 @@ public class DangNhapGUI extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        new QuanLyGUI().setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void button_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_loginActionPerformed
+        // TODO add your handling code here:
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new BenhNhaGUI().setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_button_loginActionPerformed
+
+    private void button_back1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_back1ActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_button_back1ActionPerformed
+
+    private void jCheck_show_passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheck_show_passwordActionPerformed
+        // TODO add your handling code here:
+        if (jCheck_show_password.isSelected()) {
+            password.setEchoChar((char) 0);
+        } else {
+            password.setEchoChar('*');
+        }
+    }//GEN-LAST:event_jCheck_show_passwordActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-    
+      
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField account;
     private javax.swing.JPanel bg;
+    private javax.swing.JButton button_back1;
+    private javax.swing.JButton button_login;
     private javax.swing.JLabel image_bg;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JCheckBox jCheck_show_password;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTable jTable1;
+    private javax.swing.JPasswordField password;
     private javax.swing.JLabel text_dangnhap;
     // End of variables declaration//GEN-END:variables
 
